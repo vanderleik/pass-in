@@ -2,6 +2,7 @@ package com.nlwunit.passin.services;
 
 import com.nlwunit.passin.domain.attendee.Attendee;
 import com.nlwunit.passin.domain.event.Event;
+import com.nlwunit.passin.domain.event.exceptions.EventNotFoundException;
 import com.nlwunit.passin.dto.event.EventIdDTO;
 import com.nlwunit.passin.dto.event.EventRequestDTO;
 import com.nlwunit.passin.dto.event.EventResponseDTO;
@@ -22,7 +23,7 @@ public class EventService {
 
     public EventResponseDTO getEventDetail(String eventId) {
         Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found with id: " + eventId));
+                .orElseThrow(() -> new EventNotFoundException("Event not found with id: " + eventId));
         List<Attendee> attendeeList = attendeeRepository.findByEventId(eventId);
 
         return new EventResponseDTO(event, attendeeList.size());
