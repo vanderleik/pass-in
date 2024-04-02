@@ -1,7 +1,9 @@
 package com.nlwunit.passin.dto.event;
 
 import com.nlwunit.passin.domain.event.Event;
+import lombok.Getter;
 
+@Getter
 public class EventResponseDTO {
 
     EventDetailDTO event;
