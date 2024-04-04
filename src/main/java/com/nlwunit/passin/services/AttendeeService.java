@@ -1,6 +1,7 @@
 package com.nlwunit.passin.services;
 
 import com.nlwunit.passin.domain.attendee.Attendee;
+import com.nlwunit.passin.domain.attendee.exception.AttendeeAlreadyExistsException;
 import com.nlwunit.passin.domain.checkin.Checkin;
 import com.nlwunit.passin.dto.attendee.AttendeeDetails;
 import com.nlwunit.passin.dto.attendee.AttendeeListResponseDTO;
@@ -41,4 +42,16 @@ public class AttendeeService {
         return new AttendeeListResponseDTO(attendeeDetailsList);
     }
 
+    public Attendee registerAttendee(Attendee newAttendee) {
+        return attendeeRepository.save(newAttendee);
+
+    }
+
+    public void verifyAttendeeSubscription(String email, String eventId) {
+        Optional<Attendee> isAttendeeRegistered = attendeeRepository.findByEmailAndEventId(email, eventId);
+        if (isAttendeeRegistered.isPresent()) {
+            throw new AttendeeAlreadyExistsException("Attendee already registered on this event");
+        }
+
+    }
 }
