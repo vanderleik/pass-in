@@ -52,14 +52,19 @@ public class EventService {
             throw new EventFullException("Event is full");
         }
 
+        Attendee newAttendee = getNewAttendee(attendeeDTO, event);
+        attendeeService.registerAttendee(newAttendee);
+
+        return new AttendeeIdDTO(newAttendee.getId());
+    }
+
+    private static Attendee getNewAttendee(AttendeeRequestDTO attendeeDTO, Event event) {
         Attendee newAttendee = new Attendee();
         newAttendee.setName(attendeeDTO.name());
         newAttendee.setEmail(attendeeDTO.email());
         newAttendee.setEvent(event);
         newAttendee.setCreatedAt(LocalDateTime.now());
-
-        attendeeService.registerAttendee(newAttendee);
-        return new AttendeeIdDTO(newAttendee.getId());
+        return newAttendee;
     }
 
     private Event getEventById(String eventId) {
