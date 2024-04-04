@@ -1,4 +1,4 @@
-package com.nlwunit.passin.domain.attendee.exception;
+package com.nlwunit.passin.domain.attendee.exceptions;
 
 public class AttendeeNotFoundException extends RuntimeException {
 
