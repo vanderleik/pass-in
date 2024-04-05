@@ -32,11 +32,7 @@ public class EventService {
     }
 
     public EventIdDTO createEvent(EventRequestDTO eventDTO) {
-        Event newEvent = new Event();
-        newEvent.setTitle(eventDTO.title());
-        newEvent.setDetails(eventDTO.details());
-        newEvent.setMaximumAttendees(eventDTO.maximumAttendees());
-        newEvent.setSlug(createSlug(eventDTO.title()));
+        Event newEvent = getEvent(eventDTO);
 
         eventRepository.save(newEvent);
         return new EventIdDTO(newEvent.getId());
@@ -79,6 +75,15 @@ public class EventService {
                 .replaceAll("[^\\w\\s]", "")
                 .replaceAll("\\s+", "-")
                 .toLowerCase();
+    }
+
+    private Event getEvent(EventRequestDTO eventDTO) {
+        Event newEvent = new Event();
+        newEvent.setTitle(eventDTO.title());
+        newEvent.setDetails(eventDTO.details());
+        newEvent.setMaximumAttendees(eventDTO.maximumAttendees());
+        newEvent.setSlug(createSlug(eventDTO.title()));
+        return newEvent;
     }
 
 }

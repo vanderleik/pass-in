@@ -5,13 +5,10 @@ import lombok.*;
 
 @Entity
 @Table(name = "events")
-@Getter
-@Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
+@Builder
 public class Event {
 
     @Id

@@ -8,13 +8,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "check_ins")
-@Getter
-@Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
+@Builder
 public class Checkin {
 
     @Id

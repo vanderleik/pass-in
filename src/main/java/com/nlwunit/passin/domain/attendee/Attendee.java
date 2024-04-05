@@ -8,13 +8,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "attendees")
-@Getter
-@Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
+@Builder
 public class Attendee {
 
     @Id

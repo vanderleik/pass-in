@@ -9,7 +9,6 @@ import com.nlwunit.passin.dto.attendee.AttendeeBadgeResponseDTO;
 import com.nlwunit.passin.dto.attendee.AttendeeDetails;
 import com.nlwunit.passin.dto.attendee.AttendeeListResponseDTO;
 import com.nlwunit.passin.repositories.AttendeeRepository;
-import com.nlwunit.passin.repositories.CheckInRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,7 +22,6 @@ import java.util.Optional;
 public class AttendeeService {
 
     private final AttendeeRepository attendeeRepository;
-//    private final CheckInRepository checkinRepository;
     private final CheckInService checkInService;
 
     public List<Attendee> getAllAttendeesFromEvent(String eventId) {
@@ -60,12 +58,10 @@ public class AttendeeService {
 
     public AttendeeBadgeResponseDTO getAttendeeBadge(String attendeeId, UriComponentsBuilder uriComponentsBuilder) {
         Attendee attendee = getAttendee(attendeeId);
-
         var uri = uriComponentsBuilder.path("/attendees/{attendeeId}/check-in").buildAndExpand(attendeeId).toUri().toString();
 
         AttendeeBadgeDTO badgeDTO = new AttendeeBadgeDTO(
                 attendee.getName(), attendee.getEmail(), uri, attendee.getEvent().getId());
-
 
         return new AttendeeBadgeResponseDTO(badgeDTO);
     }
